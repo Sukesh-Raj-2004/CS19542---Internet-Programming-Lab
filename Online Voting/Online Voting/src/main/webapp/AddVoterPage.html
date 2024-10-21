@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Add Voter Page</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    form {
+        margin-top: 20px;
+    }
+    label {
+        display: block;
+        margin: 10px 0 5px;
+    }
+    input[type="text"],
+    input[type="password"] {
+        width: 300px;
+        padding: 10px;
+    }
+    button {
+        margin-top: 10px;
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+</style>
+<body>
+    <h1>Add Voter</h1>
+    <form method="post" action="AddVoterServlet">
+        <!-- Voter Name -->
+        <label for="voterName">Voter Name:</label>
+        <input type="text" id="voterName" name="voterName" required>
+
+        <!-- Voter Password -->
+        <label for="voterPassword">Password:</label>
+        <input type="password" id="voterPassword" name="voterPassword" required>
+
+        <!-- Submit Button -->
+        <button type="submit">Add Voter</button>
+    </form>
+    
+    <br>
+    <a href="adminPage.html">Back to Admin Page</a>
+</body>
+</html>

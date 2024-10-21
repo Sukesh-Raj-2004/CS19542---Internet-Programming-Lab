@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Page</title>
+<script>
+    // Display alert if 'error' parameter is present in the URL
+    window.onload = function() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('error') === 'invalid') {
+        alert('Invalid credentials');
+      }
+    };
+  </script>
+  <script>
+        function accessAdminPage() {
+            const password = prompt("Enter the admin password:");
+            // Replace 'yourAdminPassword' with the actual admin password you want to use
+            const yourAdminPassword = "admin123"; // Change this to your desired password
+
+            if (password === yourAdminPassword) {
+                // Redirect to the admin page if the password is correct
+                window.location.href = "adminPage.html";
+            } else {
+                // Optional: Alert the user that the password is incorrect
+                alert("Incorrect password. Access denied.");
+            }
+        }
+    </script>
+</head>
+<style>
+.login{
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: whitesmoke;
+  border: 1px solid rgb(0, 0, 0);
+  margin-top: 100px;
+}
+body{
+  background-color: rgb(169, 164, 164) ;
+}
+form{
+  padding: 10px;
+}
+</style>
+<body>
+	<div class="login">
+      <form method="get" action="User">
+        <h1>Login</h1>
+        <p>
+          <label for="username">User Name : </label>
+          <input type="text" name="username" id="username" required>
+        </p>
+        <p>
+          <label for="password">Password : </label>
+          <input type="password" name="password" id="password" required>
+        </p>
+        <center>
+        <button type="submit">Login</button><a href="javascript:void(0);" onclick="accessAdminPage()">admin</a>
+        </center>
+      </form>
+    </div>
+</body>
+</html>

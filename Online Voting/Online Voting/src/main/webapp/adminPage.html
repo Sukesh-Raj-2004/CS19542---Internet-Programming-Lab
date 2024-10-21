@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>adminPage</title>
+</head>
+<style>
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+<body>
+	<h1>Welcome Admin</h1>
+	<a href="AddCandidatePage.html"><button>Add Candidate</button></a>
+    <a href="AddVoterPage.html"><button>Add Voter</button></a>
+	<form action="StartElectionServlet" method="post">
+        <button type="submit">Start Election</button>
+    </form>
+    <form action="EndElectionServlet" method="post">
+        <button type="submit">End Election</button>
+    </form>
+</body>
+</html>

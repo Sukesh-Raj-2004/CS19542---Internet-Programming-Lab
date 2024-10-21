@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>VotePage</title>
+<script>
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null; // Return null if cookie not found
+        }
+        function checkElectionStatus() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "CheckElectionStatusServlet", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const response = xhr.responseText.trim();
+                    if (response === "active") {
+                        document.getElementById("candidates").innerText = "The election has started.";
+                        displayCandidates(); // Call function to display candidates
+                    } else {
+                        document.getElementById("candidates").innerText = "The election has not started yet.";
+                    }
+                }
+            };
+            xhr.send();
+        }
+        window.onload = function() {
+            const username = getCookie("username");
+            console.log("Username cookie:", username); // Debugging line
+            if (!username) {
+                // If cookie doesn't exist, redirect to login page
+                window.location.href = "LoginForm.html";
+            } else {
+                // Display welcome message
+                document.getElementById("welcome").innerText = `Welcome, ${username}! Please cast your vote.`;
+                checkElectionStatus();
+            }
+        };
+        function fetchCandidates() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "FetchCandidatesServlet", true); // Update with your servlet path
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Directly insert the HTML returned by the servlet
+                    document.getElementById("candidates").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+        /*function fetchCandidates() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "FetchCandidatesServlet", true); // Update with your servlet path
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const candidates = JSON.parse(xhr.responseText); 
+                    displayCandidates(candidates);
+                }
+            };
+            xhr.send();
+        }
+       function displayCandidates(candidates) {
+            const candidatesDiv = document.getElementById("candidates");
+            candidatesDiv.innerHTML = ""; // Clear previous candidates
+
+            if (candidates.length === 0) {
+                candidatesDiv.innerText = "No candidates available.";
+                return;
+            }
+
+            candidates.forEach(candidate => {
+                const candidateDiv = document.createElement("div");
+                candidateDiv.innerText = candidate; // Assuming candidate object has a 'name' property
+                const voteButton = document.createElement("button");
+                voteButton.innerText = "Vote";
+                candidateDiv.appendChild(voteButton);
+                candidatesDiv.appendChild(candidateDiv);
+            });*/
+        
+    </script>
+</head>
+	<p id="welcome"></p>
+	<div id="candidates"></div>
+	<form id="statusForm" method="GET" action="CheckElectionStatusServlet" style="display: none;">
+        <input type="hidden" name="checkStatus" value="true">
+    </form>
+<body>
+	
+</body>
+</html>
